@@ -1,0 +1,30 @@
+import math
+
+class Point:
+  def __init__(self, x, y, z):
+    self.x = x
+    self.y = y
+    self.z = z
+
+  
+  def get_coordinates(self):
+    string = ''.join((str(self.x),' ', str(self.y), ' ', str(self.z)))
+    return string
+
+  def change_coordinates(self, x, y, z):
+    self.x = x
+    self.y = y
+    self.z = z
+
+  def distance(self, x, y, z):
+    return math.sqrt( (self.x - x)**2 + (self.y - y)**2 + (self.z - z)**2 )
+
+
+# dichiaro il punto (1,0,0)
+p1 = Point(1,0,0)
+
+#cambio le coordinate del punto
+p1.change_coordinates(3, 0, 0)
+
+#stampo nuove coordinate e distanza rispetto alle vecchie coordinate
+print(p1.get_coordinates(),"\n", p1.distance(1,0,0)) 
