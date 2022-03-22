@@ -1,0 +1,23 @@
+animali = ['cani', 'gatti', 'scoiattoli', 'alci']
+f = lambda animale: animale.capitalize()
+
+x = lambda a: a + 10
+
+
+# la funzione "f" applicata alla stringa che rappresenta una specie animale
+# rende maiuscola la prima lettera della stringa ("animale" è l'argomento, "animale.capitalize()" è l'espressione
+# valutata dalla funzione lambda)
+
+print(f('cani'))
+print(f('alci'))
+
+# la funzione "x" applicata ad un numero somma 0 al numero stesso ("a" è l'argomento, "a+0" l'espressione da valutare)
+
+print(x(0))
+
+
+# la funzione average calcola la media tra 2 numeri
+
+average = lambda x, y : (x+y)/2
+
+print(average(100, 1))
