@@ -1,0 +1,68 @@
+from tabulate import tabulate
+
+
+# definizione della classe campionato sportivo
+
+class campionato_sportivo:
+    def __init__(self, list_teams):
+        self.list_teams = list_teams
+
+    def add_team(self, team):
+        self.list_teams.append([team[0], team[1]])
+
+    def remove_team(self, name_team):
+        for i in range(len(self.list_teams)):
+            if self.list_teams[i][0] == name_team:
+                self.list_teams.pop(i)
+                return
+        print("Squadra non trovata")
+
+    def print_points(self, name_team):
+        for i in range(len(self.list_teams)):
+            if self.list_teams[i][0] == name_team:
+                print(self.list_teams[i][1])
+                return
+        print("Squadra non trovata")
+
+    def winner(self):
+        points = 0
+        winner = ""
+        for ele in self.list_teams:
+            if ele[1] > points:
+                points = ele[1]
+                winner = ele[0]
+        print("\n\nAnd the winner is:\n", winner, "with", points, "points!!")
+
+    def loosers(self):
+        list_aux = []
+        loosers = []
+        for team in self.list_teams:
+            list_aux.append(team[1])
+        list_aux.sort()
+        while len(loosers) < 3:
+            for team in self.list_teams:
+                if team[1] == list_aux[2]:
+                    loosers.append(team)
+                elif team[1] == list_aux[1]:
+                    loosers.append(team)
+                elif team[1] == list_aux[0]:
+                    loosers.append(team)
+        print("\nThese are the loosers:\n\n", tabulate(loosers, headers= ["Team", "Points"]))
+
+
+# inizializza un campionato con un certo numero di squadre
+# deciso dall’utente, scrive la squadra vincitrice e le ultime 3 squadre in classifica.
+
+championship = campionato_sportivo([])
+bool_var = True
+print("Add a team to championship writing name and points. To exit write q.")
+while bool_var:
+    name = input("Name of the team:\n")
+    if name != 'q':
+        points = int(input("points of the team:\n"))
+        championship.add_team([name,points])
+    else:
+        bool_var = False
+
+championship.winner()
+championship.loosers()
