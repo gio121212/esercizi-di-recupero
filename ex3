@@ -1,0 +1,61 @@
+import numpy as np
+
+class Point_2d:
+    def __init__(self, x, y):
+        self.x = float(x)
+        self.y = float(y)
+
+    # metodo che calcola il baricentro dei punti 2d "points"
+
+    def baricentro(self, *points):
+        x_bar = 0.
+        y_bar = 0.
+        counter = 0
+        coordinates = np.zeros(2)
+        for point in points:
+            counter += 1
+            x_bar += point.x
+            y_bar += point.y
+        coordinates[0] = x_bar / counter
+        coordinates[1] = y_bar / counter
+        return coordinates
+
+    # metodo che stampa a schermo le coordinate del baricentro
+
+    def print_baricentro(self, *points):
+        print(self.baricentro(*points))
+
+# legge il nome del file di dati da tastiera
+
+data = input("Nome del file da leggere:")
+
+# legge il file di dati (gestendo le eccezioni)
+
+try:
+    f=open(data, "r")
+
+except OSError:
+    print('Error: cannot open file', data)
+
+else:
+    lines = f.readlines()
+    result = []
+    for x in lines:
+        result.append(x.split(' '))
+        f.close()
+
+
+    try:
+        # ciclo che genera la lista di punti 2d "points" saltando la prima riga del file
+
+        points = []
+        for i in range(1, len(result)):
+            points.append(Point_2d(result[i][0], result[i][1]))
+            # print(points[i-1].x, points[i-1].y)
+
+    except ValueError:
+        print('Errore: il formato del file in input non è corretto')
+
+    else:
+        p1 = Point_2d(0, 0)
+        print("le coordinate del baricentro sono:", p1.baricentro(*points))
